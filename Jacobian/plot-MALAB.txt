@@ -1,0 +1,546 @@
+t1=CTUN(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=ATT(:,2);
+t2=t2-t2(1);
+t1=CTUN(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=ATT(:,2);
+t2=t2-t2(1);
+t2=t2/10000000;
+t2=t2*10;
+t=NTUN(:,2);
+t=t-t(1);
+t=t/1000000;
+figure
+subplot(3,2,1)
+plot(t,NTUN(:,3)/100,t,NTUN(:,5)/100)
+title('x track')
+subplot(3,2,2)
+plot(t,NTUN(:,4)/100,t,NTUN(:,6)/100)
+title('y track')
+subplot(3,2,3)
+plot(t2,ATT(:,3),t2,ATT(:,4))
+title('roll track')
+subplot(3,2,4)
+plot(t2,ATT(:,5),t2,ATT(:,6))
+title('pitch track')
+subplot(3,2,5)
+plot(t1,CTUN(:,7),t1,CTUN(:,8))
+title('z track')
+subplot(3,2,6)
+plot(t2,ATT(:,7),t2,ATT(:,8))
+title('yaw track')
+----------------------------------------------------------------------------------
+Radians:
+
+t1=CTUN(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=ATT(:,2);
+t2=t2-t2(1);
+t1=CTUN(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=ATT(:,2);
+t2=t2-t2(1);
+t2=t2/10000000;
+t2=t2*10;
+t=NTUN(:,2);
+t=t-t(1);
+t=t/1000000;
+figure
+subplot(2,3,1)
+plot(t,NTUN(:,3)/100,t,NTUN(:,5)/100)
+title('x track(m)')
+h = vline(19.3,'black')
+legend('referance','actual')
+subplot(2,3,2)
+plot(t,NTUN(:,4)/100,t,NTUN(:,6)/100)
+title('y track(m)')
+h = vline(19.3,'black')
+subplot(2,3,3)
+plot(t1,CTUN(:,7),t1,CTUN(:,8))
+title('z track(m)')
+h = vline(19.3,'black')
+subplot(2,3,4)
+plot(t2,ATT(:,3)*3.14/180,t2,ATT(:,4)*3.14/180)
+title('roll track(rad)')
+h = vline(19.3,'black')
+subplot(2,3,5)
+plot(t2,ATT(:,5)*1.2*3.14/180,t2,ATT(:,6)*3.14/180)
+title('pitch track(rad)')
+h = vline(19.3,'black')
+subplot(2,3,6)
+plot(t2,ATT(:,7)*3.14/180,t2,ATT(:,8)*3.14/180)
+title('yaw track(rad)')
+h = vline(19.3,'black')
+
+
+
+
+
+
+
+h = vline(14,'black')
+---------------------------------------------------------------------------------------------------
+
+Radians yaw correction script:
+
+--------------------------------------------------------------------
+n=size(ATT(:,7));
+Moh=ATT(:,7);
+for i=1:n
+    if(Moh(i)>180)
+        Moh(i)=Moh(i)-360;
+    end
+end
+
+n=size(ATT(:,8));
+Moh1=ATT(:,8);
+for i=1:n
+    if(Moh1(i)>180)
+        Moh1(i)=Moh1(i)-360;
+    end
+end
+
+erroryaw=Moh-Moh1;
+for i=1:n
+    if(erroryaw(i)>180)
+        erroryaw(i)=360-erroryaw(i);
+    end
+end
+-------------------------------------------------------------------
+
+t1=CTUN(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=ATT(:,2);
+t2=t2-t2(1);
+t1=CTUN(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=ATT(:,2);
+t2=t2-t2(1);
+t2=t2/10000000;
+t2=t2*10;
+t=NTUN(:,2);
+t=t-t(1);
+t=t/1000000;
+figure
+subplot(3,2,1)
+plot(t,NTUN(:,3)/100,t,NTUN(:,5)/100)
+title('x track(m)')
+subplot(3,2,2)
+plot(t,NTUN(:,4)/100,t,NTUN(:,6)/100)
+title('y track(m)')
+subplot(3,2,3)
+plot(t1,CTUN(:,7),t1,CTUN(:,8))
+title('z track(m)')
+subplot(3,2,4)
+plot(t2,ATT(:,3)*3.14/180,t2,ATT(:,4)*3.14/180)
+title('roll track(rad)')
+subplot(3,2,5)
+plot(t2,ATT(:,5)*3.14/180,t2,ATT(:,6)*3.14/180)
+title('pitch track(rad)')
+subplot(3,2,6)
+plot(t2,Moh*3.14/180,t2,Moh1*3.14/180)
+title('yaw track(rad)')
+------------------------------------------------------------------------------------------------
+
+errors deg:
+
+t1=CTUN(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=ATT(:,2);
+t2=t2-t2(1);
+t1=CTUN(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=ATT(:,2);
+t2=t2-t2(1);
+t2=t2/10000000;
+t2=t2*10;
+t=NTUN(:,2);
+t=t-t(1);
+t=t/1000000;
+figure
+subplot(3,2,1)
+plot(t,NTUN(:,3)/100-NTUN(:,5)/100)
+title('x error(m)')
+subplot(3,2,2)
+plot(t,NTUN(:,4)/100-NTUN(:,6)/100)
+title('y error(m)')
+subplot(3,2,3)
+plot(t1,CTUN(:,7)-CTUN(:,8))
+title('z error(m)')
+subplot(3,2,4)
+plot(t2-30,ATT(:,3)-ATT(:,4))
+title('roll error(deg)')
+subplot(3,2,5)
+plot(t2-30,ATT(:,5)-ATT(:,6))
+title('pitch error(deg)')
+subplot(3,2,6)
+plot(t2-30,ATT(:,7)-ATT(:,8))
+title('yaw error(deg)')
+----------------------------------------------------------------------------------------------------
+
+radians error:
+
+t1=CTUN(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=ATT(:,2);
+t2=t2-t2(1);
+t1=CTUN(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=ATT(:,2);
+t2=t2-t2(1);
+t2=t2/10000000;
+t2=t2*10;
+t=NTUN(:,2);
+t=t-t(1);
+t=t/1000000;
+figure
+subplot(2,3,1)
+plot(t,NTUN(:,3)/100-NTUN(:,5)/100)
+title('x error(m)')
+subplot(2,3,2)
+plot(t,NTUN(:,4)/100-NTUN(:,6)/100)
+title('y error(m)')
+subplot(2,3,3)
+plot(t1,CTUN(:,7)-CTUN(:,8))
+title('z error(m)')
+subplot(2,3,4)
+plot(t2,(ATT(:,3)-ATT(:,4))*3.14/180)
+title('roll error(rad)')
+subplot(2,3,5)
+plot(t2,(ATT(:,5)-ATT(:,6))*3.14/180)
+title('pitch error(rad)')
+subplot(2,3,6)
+plot(t2,(ATT(:,7)-ATT(:,8))*3.14/180)
+title('yaw error(rad)')
+----------------------------------------------------------------------------------------------
+
+radians corrected errors:
+----------------------------------------------
+n=size(ATT(:,7));
+Moh=ATT(:,7);
+for i=1:n
+    if(Moh(i)>180)
+        Moh(i)=Moh(i)-360;
+    end
+end
+
+n=size(ATT(:,8));
+Moh1=ATT(:,8);
+for i=1:n
+    if(Moh1(i)>180)
+        Moh1(i)=Moh1(i)-360;
+    end
+end
+
+erroryaw=Moh-Moh1;
+for i=1:n
+    if(erroryaw(i)>180)
+        erroryaw(i)=360-erroryaw(i);
+    end
+end
+------------------------------------------------
+
+t1=CTUN(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=ATT(:,2);
+t2=t2-t2(1);
+t1=CTUN(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=ATT(:,2);
+t2=t2-t2(1);
+t2=t2/10000000;
+t2=t2*10;
+t=NTUN(:,2);
+t=t-t(1);
+t=t/1000000;
+figure
+subplot(3,2,1)
+plot(t,NTUN(:,3)/100-NTUN(:,5)/100)
+title('x error(m)')
+subplot(3,2,2)
+plot(t,NTUN(:,4)/100-NTUN(:,6)/100)
+title('y error(m)')
+subplot(3,2,3)
+plot(t1,CTUN(:,7)-CTUN(:,8))
+title('z error(m)')
+subplot(3,2,4)
+plot(t2,(ATT(:,3)-ATT(:,4))*3.14/180)
+title('roll error(rad)')
+subplot(3,2,5)
+plot(t2,(ATT(:,5)-ATT(:,6))*3.14/180)
+title('pitch error(rad)')
+subplot(3,2,6)
+plot(t2,(erroryaw)*3.14/180)
+title('yaw error(rad)')
+
+
+
+Optial Flow:
+>> t=OF(:,2);
+>> t=t-t(1);
+>> t=t/1000000;
+>> t1=IMU(:,2);
+>> t1=t1-t1(1);
+>> t1=t1/1000000;
+>> figure
+>> subplot(1,2,1)
+>> plot(t,OF(:,6),t1,IMU(:,3));
+>> title('OF bodyx vs IMU Gyrox')
+>> subplot(1,2,2)
+>> plot(t,OF(:,7),t1,IMU(:,4));
+>> title('OF bodyy vs IMU Gyroy')
+
+
+
+
+----------------------------WIND
+
+t=SIM(:,2);
+t=t-t(1);
+t=t/1000000;
+figure
+subplot(2,2,1)
+plot(t,SIM(:,3),t,SIM(:,4))
+title('wind speed x and y (m/s) in earth frame')
+subplot(2,2,2)
+plot(t,SIM(:,5),t,SIM(:,6))
+title('wind speed x and y (m/s) in body frame')
+subplot(2,2,3)
+plot(t,SIM(:,7),t,SIM(:,9))
+title('wind force x and estimation (N) body frame')
+subplot(2,2,4)
+plot(t,SIM(:,8),t,SIM(:,10))
+title('wind force y and estimation(N) body frame')
+
+
+t=WIND(:,2);
+t=t-t(1);
+t=t/1000000;
+figure
+plot(t,WIND(:,3)*1.4/10,t,WIND(:,4)*1.4/10)
+title('wind forces FX and FY (N) in earth frame')
+legend('Fx','Fy')
+h = vline(19.3,'black')
+
+t=WIND(:,2);
+t=t-t(1);
+t=t/1000000;
+figure 
+plot(t,WIND(:,5)*1.4/10)
+title('Wind Mean force (N)')
+legend('Fmean')
+h = vline(19.3,'black')
+
+
+
+
+----------------------Innovations IMU
+
+t1=NKF3(:,2);
+t1=t1-t1(1);
+t1=t1/1e6;
+figure
+subplot(1,3,1);
+plot(t1,NKF3(:,9));
+title('Residue IMUx (m/s/s)')
+xlabel('t(s)')
+subplot(1,3,2);
+plot(t1,NKF3(:,10));
+title('Residue IMUy (m/s/s)')
+xlabel('t(s)')
+subplot(1,3,3);
+plot(t1,NKF3(:,11));
+title('Residue IMUz (m/s/s)')
+xlabel('t(s)')
+
+
+-------------------Innovation Position
+
+t1=NKF3(:,2);
+t1=t1-t1(1);
+t1=t1/1e6;
+figure
+subplot(1,3,1);
+plot(t1,NKF3(:,6));
+title('Residue IMUx (m/s/s)')
+xlabel('t(s)')
+subplot(1,3,2);
+plot(t1,NKF3(:,7));
+title('Residue IMUy (m/s/s)')
+xlabel('t(s)')
+subplot(1,3,3);
+plot(t1,NKF3(:,8));
+title('Residue IMUz (m/s/s)')
+xlabel('t(s)')
+
+
+
+----------------------Motors
+t1=RCOU(:,2);
+t1=t1-t1(1);
+t1=t1/1e6;
+figure
+plot(t1,RCOU(:,3),t1,RCOU(:,4),t1,RCOU(:,5),t1,RCOU(:,6),t1,RCOU(:,7),t1,RCOU(:,8));
+title('Motors PWM')
+xlabel('t(s)')
+legend( 'M1','M2', 'M3', 'M4', 'M5', 'M6'  )
+
+h = vline(19.3,'black')
+
+
+
+
+---------------------Plot 3D
+t1=CTUN(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=ATT(:,2);
+t2=t2-t2(1);
+t1=CTUN(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=ATT(:,2);
+t2=t2-t2(1);
+t2=t2/10000000;
+t2=t2*10;
+t=NTUN(:,2);
+t=t-t(1);
+t=t/1000000;
+figure
+plot(NTUN(:,5)*1.1/100,NTUN(:,6)*1.1/100)
+hold on 
+plot(NTUN(:,3)/100,NTUN(:,4)/100)
+title('2D track')
+legend('actual','referance')
+
+
+
+------------------------plot 3d
+t1=CTUN(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=PSC(:,2);
+t2=t2-t2(1);
+t2=t2/10000000;
+t2=t2*10;
+figure
+plot(PSC(:,3)/100,PSC(:,4)/100)
+hold on 
+plot(PSC(:,5)/100,PSC(:,6)/100)
+title('2D track')
+legend('referance','actual');
+xlabel('x(m)')
+ylabel('y(m)')
+
+
+t1=CTUN(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=ATT(:,2);
+t2=t2-t2(1);
+t2=t2/10000000;
+t2=t2*10;
+t=PSC(:,2);
+t=t-t(1);
+t=t/1000000;
+figure
+subplot(3,2,1)
+plot(t,PSC(:,3)/100,t,PSC(:,5)/100)
+title('x track')
+xlabel('t(s)')
+ylabel('x(m)')
+legend('referance','actual');
+subplot(3,2,3)
+plot(t,PSC(:,4)/100,t,PSC(:,6)/100)
+title('y track')
+xlabel('t(s)')
+ylabel('y(m)')
+subplot(3,2,2)
+plot(t2,ATT(:,3),t2,ATT(:,4))
+title('roll track')
+xlabel('t(s)')
+ylabel('roll(deg)')
+subplot(3,2,4)
+plot(t2,ATT(:,5),t2,ATT(:,6))
+title('pitch track')
+xlabel('t(s)')
+ylabel('pitch(deg)')
+subplot(3,2,5)
+plot(t1,CTUN(:,7),t1,CTUN(:,8))
+title('z track')
+xlabel('t(s)')
+ylabel('z(m)')
+subplot(3,2,6)
+plot(t2,ATT(:,7),t2,ATT(:,8))
+title('yaw track')
+xlabel('t(s)')
+ylabel('yaw(deg)')
+
+
+
+
+t1=PSC(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+t2=ATC(:,2);
+t2=t2-t2(1);
+t2=t2/10000000;
+t2=t2*10;
+figure
+title('Gains')
+subplot(1,3,1)
+plot(t1,PSC(:,15))
+hold on
+plot(t1,PSC(:,16) )
+hold on
+plot(t1,PSC(:,17))
+legend('S','Alpha', 'V');
+subplot(1,3,2)
+plot(t2,ATC(:,3))
+hold on
+plot(t2,ATC(:,4))
+hold on
+plot(t2,ATC(:,5))
+legend('S','Alpha', 'V');
+subplot(1,3,3)
+plot(t2,ATC(:,6))
+hold on
+plot(t2,ATC(:,7))
+hold on
+plot(t2,ATC(:,8))
+legend('S','Alpha', 'V');
+
+
+t1=SITL(:,2);
+t1=t1-t1(1);
+t1=t1/1000000;
+figure
+title('Wind forces')
+plot(t1,SITL(:,12),t1,SITL(:,13))
+xlabel('t(s)')
+ylabel('Force(N)')
+legend('Fx','Fy');
+
+
+set(0,'defaultAxesFontSize', 30);
+set(0, 'DefaultLineLineWidth', 3);
+
+
+
+
+
+
+

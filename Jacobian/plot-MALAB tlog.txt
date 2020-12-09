@@ -1,0 +1,33 @@
+tatt=time_boot_ms_mavlink_attitude_t(:,2);
+tatt=tatt-tatt(1);
+tatt=tatt/1000;
+tnav=time_boot_ms_mavlink_global_position_int_t(:,2);
+tnav=tnav-tnav(1);
+tnav=tnav/1000;
+tpos=time_boot_ms_mavlink_local_position_ned_t(:,2);
+tpos=tpos-tpos(1);
+tpos=tpos/1000;
+figure
+subplot(3,2,1)
+plot(tpos,x_mavlink_local_position_ned_t(:,2))
+title('x track')
+subplot(3,2,2)
+plot(tpos,y_mavlink_local_position_ned_t(:,2))
+title('y track')
+subplot(3,2,3)
+plot(tpos,-z_mavlink_local_position_ned_t(:,2))
+title('z track')
+subplot(3,2,4)
+plot(tnav-30,nav_roll_mavlink_nav_controller_output_t(:,2),tatt-30,roll_mavlink_attitude_t(:,2)*180/pi)
+title('roll track')
+subplot(3,2,5)
+plot(tnav-30,nav_pitch_mavlink_nav_controller_output_t(:,2),tatt-30,pitch_mavlink_attitude_t(:,2)*180/pi)
+title('pitch track')
+subplot(3,2,6)
+plot(tatt-30,yaw_mavlink_attitude_t(:,2)*180/pi,tatt-30,nav_bearing_mavlink_nav_controller_output_t(:,2))
+title('yaw track')
+
+tmot=time_usec_mavlink_servo_output_raw_t(:,2)
+tmot=tmot-tmot(1);
+tmot=tmot/1000000
+plot(tmot,servo1_raw_mavlink_servo_output_raw_t(:,2),tmot,servo2_raw_mavlink_servo_output_raw_t(:,2),tmot,servo3_raw_mavlink_servo_output_raw_t(:,2),tmot,servo4_raw_mavlink_servo_output_raw_t(:,2),tmot,servo5_raw_mavlink_servo_output_raw_t(:,2),tmot,servo6_raw_mavlink_servo_output_raw_t(:,2))
