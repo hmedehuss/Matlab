@@ -1,0 +1,4 @@
+This equation has two roots 
+Because discriminant is: D = 177 
+Real Root1 is: x1= -0.0706611 
+Real Root2 is: x2= -1.17934 
